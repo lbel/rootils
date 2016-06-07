@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+import common
+import ROOT
+
+def print_leaves(tree, prefix = "", sample_size = 5):
+    max_leaf_name = max([len(leaf.GetName()) for leaf in tree.GetListOfLeaves()])
+    for leaf in tree.GetListOfLeaves():
+        sample = ""
+        for entry in range(sample_size):
+            tree.GetEntry(entry)
+            sample += str(get_value(leaf)) + "\t"
+        print("{}\033[1;30m{}\033[1;34m{}\033[0m{} {}".format(prefix, leaf.GetTypeName()[0], leaf.GetName(), " "*(max_leaf_name - len(leaf.GetName())), sample))
+
+def get_value(leaf):
+    if leaf.GetTypeName()[0] in ('D', 'F'):
+        return leaf.GetValueLongDouble()
+    elif leaf.GetTypeName()[0] in ('L', 'I', 'S'):
+        return leaf.GetValueLong64()
+    return leaf.GetValue()
+
+common.perform_trees(lambda tree: print_leaves(tree, "    "))
+
