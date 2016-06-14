@@ -4,6 +4,7 @@ import common
 import ROOT
 
 def print_leaves(tree, prefix = "", sample_size = 5):
+    print("Entries: {}".format(tree.GetEntriesFast()))
     max_leaf_name = max([len(leaf.GetName()) for leaf in tree.GetListOfLeaves()])
     for leaf in tree.GetListOfLeaves():
         sample = ""
