@@ -16,7 +16,7 @@ def print_leaves(tree, prefix = "", sample_size = 5):
 def get_value(leaf):
     if leaf.GetTypeName()[0] in ('D', 'F'):
         return leaf.GetValueLongDouble()
-    elif leaf.GetTypeName()[0] in ('L', 'I', 'S'):
+    elif leaf.GetTypeName()[0] in ('L', 'I', 'S', 'U', 'B'):
         return leaf.GetValueLong64()
     return leaf.GetValue()
 
